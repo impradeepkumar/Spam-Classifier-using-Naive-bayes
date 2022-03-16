@@ -36,4 +36,17 @@ Y = Y.iloc[:,1].values
 
 #Model Training
 
-from sklearn.model_selection import train_test_split(X, Y, test_size = 0.20, random_state = 0)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test =train_test_split(X, Y, test_size = 0.20, random_state = 0)
+
+# naive bayes Model used as classifier
+from sklearn.naive_bayes import MultinomialNB
+spam_detect_model = MultinomialNB().fit(X_train, y_train)
+
+y_prediction = spam_detect_model.predict(X_test)
+
+from sklearn.metrics import confusion_matrix
+con_mat = confusion_matrix(y_test, y_prediction) 
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(y_test, y_prediction)
